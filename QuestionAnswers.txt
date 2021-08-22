@@ -41,13 +41,14 @@ Theres a range of tests that havent been covered so far.
 
 2. Jupiter Toys is expected to grow and expand its offering into books, tech, and modern art. We are
 expecting the of tests will grow to a very large number.
-1. What approaches could you used to reduce overall execution time?
+
+	1. What approaches could you used to reduce overall execution time?
 
 ensure all waits are dynamic i.e. no dead down time
 ensure a firm scope of testing so that we arent needlessly testing outside of scope
 through threading we could be running multiple browser / test instances at once, for parrallel test execution
 
-2. How will your framework cater for this?
+	2. How will your framework cater for this?
 
 We already use dynamic waits for zero dead time
 Scope of testing has been taken off the given document.
