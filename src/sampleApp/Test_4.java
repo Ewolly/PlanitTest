@@ -51,6 +51,7 @@ public class Test_4 {
         boolean bearPresent = false;
         WebElement formElement = driver.findElement(By.className("ng-scope"));
         List<WebElement> list = formElement.findElements(By.xpath("*"));
+        // TODO check this properly as this isnt dynamic
         for(WebElement item:list) {
             if (item.getText().contains("Stuffed Frog $10.99 $21.98")){
                 System.out.print("Frog present in cart");
