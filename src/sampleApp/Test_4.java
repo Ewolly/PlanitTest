@@ -6,12 +6,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Hashtable;
 import java.util.List;
 
 public class Test_4 {
     public static void main(String[] args) throws Exception {
         // list of items to buy
-        String[] shoppingList = {"product-6", "product-6", "product-4"};
+        Hashtable<String, Integer> shoppingList = new Hashtable<>();
+        shoppingList.put("product-2", 2);
+        shoppingList.put("product-4", 5);
+        shoppingList.put("product-7", 3);
         String hrefShop = "a[href*='#/shop']";
         String hrefCart = "a[href*='#/cart']";
         String hrefCheckout = "a[href*='#/checkout']";
@@ -28,10 +32,12 @@ public class Test_4 {
 
         // finds/buys the products
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Buy")));
-        for (String item : shoppingList){
-            driver.findElement(By.xpath("//*[@id=\"" + item + "\"]/div/p/a")).click();
-            System.out.print("Buying " + item + "\n");
-        }
+        shoppingList.forEach((k,v) -> {
+            for(int i = 0; i < (int) v; i++){
+                driver.findElement(By.xpath("//*[@id=\"" + k + "\"]/div/p/a")).click();
+                System.out.print("Buying " + k + "\n");
+            }
+        });
 
         // Navigate to cart
         driver.findElement(By.cssSelector(hrefCart)).click();
@@ -40,19 +46,26 @@ public class Test_4 {
         // Wait for checkout load
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(hrefCheckout)));
         // Validate cart
-        boolean cowPresent = false;
+        boolean frogPresent = false;
         boolean bunnyPresent = false;
+        boolean bearPresent = false;
         WebElement formElement = driver.findElement(By.className("ng-scope"));
         List<WebElement> list = formElement.findElements(By.xpath("*"));
         for(WebElement item:list) {
-            if (item.getText().contains("Funny Cow $10.99 $21.98")){
-                cowPresent = true;
+            if (item.getText().contains("Stuffed Frog $10.99 $21.98")){
+                System.out.print("Frog present in cart");
+                frogPresent = true;
             }
-            if (item.getText().contains("Fluffy Bunny $9.99 $9.99")){
+            if (item.getText().contains("Fluffy Bunny $9.99 $49.95")){
+                System.out.print("Bunny present in cart");
                 bunnyPresent = true;
             }
+            if (item.getText().contains("Valentine Bear $14.99 $44.97")){
+                System.out.print("Bear present in cart");
+                bearPresent = true;
+            }
         }
-        if(!cowPresent || !bunnyPresent){
+        if(!frogPresent || !bunnyPresent || !bearPresent){
             throw new Exception("Items not present in cart!!!!");
         }
         System.out.print("Validated cart\n");

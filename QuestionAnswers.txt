@@ -1,0 +1,61 @@
+1. What other possible scenario’s would you suggest for testing the Jupiter Toys application?
+
+Theres a range of tests that havent been covered so far.
+ - Functionality of the dynamic resizing 
+ - Verification of the home page
+ 	- the 6 tabs: Home, Shop, Contact, Login, Cart, Start Shopping
+ 	- Logo / text placements
+ - Verification of shop tab
+	 - validate products / prices match
+	 - Images Load
+	 - Cart value increase per purchase
+	 - other hyperlinks still work
+ - Contact Page
+ 	 - Thats all the fields work
+ 	 - That the fields are sanitising data inputs
+ 	 - Layout of the page
+ 	 - hyperlinks still work
+ - Login page
+ 	 - Input santisation
+ 	 - Password is masked
+ 	 - Buttons work
+ 	 - Invalid credentials fail
+ 	 - valid credentials work
+ - Cart page
+ 	 - That cart is empty upon load
+ 	 - Depending on cookies, should cart remain populated? 
+ 	 - that items appear correctly
+ 	 - correct image is loaded with the product
+ 	 - that the final total down the bottom is correct
+ 	 - items can be removed from the cart with the removal action
+ 	 - Checkout / empty cart buttons work
+ - Check out page
+ 	 - Layout is correct
+ 	 - mandatory fields are required
+ 	 - card selection box is populated correctly
+ 	 - Card number has to be correct format / length
+ 	 - Sanitisation of data inputs
+ 	 - Sumbit button works
+
+
+
+2. Jupiter Toys is expected to grow and expand its offering into books, tech, and modern art. We are
+expecting the of tests will grow to a very large number.
+1. What approaches could you used to reduce overall execution time?
+
+ensure all waits are dynamic i.e. no dead down time
+ensure a firm scope of testing so that we arent needlessly testing outside of scope
+through threading we could be running multiple browser / test instances at once, for parrallel test execution
+
+2. How will your framework cater for this?
+
+We already use dynamic waits for zero dead time
+Scope of testing has been taken off the given document.
+Currently the framwork does not cater th threading. But there is nothing stopping test suites to be pulled into threads.
+
+3. Describe when to use a BDD approach to automation and when NOT to use BDD
+BDDs are best used when doing functional testing. functional testing typically has very strict start and end points for the test.
+By using a BDD in this scenario you are helping to increase collabaration, readability, and clear scope definition.
+However BDD isnt always required in some scenarios. Depending on the outcome of the test, or if its mearly a tool to be used within the framework
+a BDD isnt required. Adding it in these scenarios adds minimal benefits, and the added overhead that the BDD brings to the project can slow
+down both execution and development time. 
